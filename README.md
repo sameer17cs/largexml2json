@@ -56,5 +56,5 @@ $ npm install
 
 ### Example
 
-largexml2json --input ./test/sample.xml --output ./test/sample.json --tagtoextract book
-largexml2json --input ./test/sample.xml --output ./test/sample.json --tagtoextract book --limit 100
+  - largexml2json --input ./test/sample.xml --output ./test/sample.json --tagtoextract book
+  - largexml2json --input ./test/sample.xml --output ./test/sample.json --tagtoextract book --limit 100
