@@ -3,6 +3,7 @@
   Description: Utility to convert large xml to json line
 */
 
+'use strict';
 const fs = require('fs');
 const XmlStream = require('xml-stream');
 const flags = require('flags');
@@ -62,7 +63,7 @@ function parseOneXml(element) {
 
   //If root xml tag has attributes, add it to json root 
   if (element['$']) {
-    for (attr in element['$']) {
+    for (const attr in element['$']) {
       newelement[attr] = element['$'][attr]
     }
   }
