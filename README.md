@@ -27,31 +27,34 @@ $ npm link
 For production release:
 ```sh
 $ git clone https://github.com/sameer17cs/largexml2json
-$ cd mongo-to-elastic-dump
+$ cd largexml2json
 $ npm install
 ```
 
 ### Options
 
   - input: ```String```
-      - filepath of input xml
       - mandatory
+      - filepath of input xml
 
   - output: ```String```
+      - mandatory
       - filepath of output json
       - output as json lines
-      - mandatory
 
   - tagtoextract: ```String```
+      - mandatory
       - name of xml tag/nested-tag to extract as json
       - content of selected tags will be converted to json line
       - nested content are stored in json field ```child```
     
   - limit: ```Number```
+      - Optional
       - max output buffer size
       - default: 10
       - For higher limit, pass  --max-old-space-size args to node
 
 ### Example
 
-largexml2json --input ./test/sample.xml --output ./test/sample.json --tagtoextract book --limit 2
+largexml2json --input ./test/sample.xml --output ./test/sample.json --tagtoextract book
+largexml2json --input ./test/sample.xml --output ./test/sample.json --tagtoextract book --limit 100
