@@ -1,3 +1,7 @@
+/*
+  Author: Sameer Deshmukh
+  Description: Utility to convert large xml to json line
+*/
 
 const fs = require('fs');
 const XmlStream = require('xml-stream');
@@ -6,8 +10,6 @@ flags.defineString('input', 'test.xml', 'name of input xml file');
 flags.defineString('output', 'test.json', 'name of output json file');
 flags.defineString('tagtoextract', '', 'name of xml tag/subtag to extract as json');
 flags.defineNumber('limit', 10, 'max buffer size limit');
-
-
 flags.parse();
 
 const xml_file_path = flags.get('input');
@@ -26,7 +28,6 @@ function main() {
     process.exit(1);
   }
   if (fs.existsSync(output_file)) {
-    console.log('deleteing exisiting');
     fs.unlinkSync(output_file);
   }
   parse();
@@ -44,6 +45,7 @@ function parse() {
   });
   xmlStream.on('end', function () {
     flush();
+    console.info('Done !!!')
     process.exit(0);
   });
 }
@@ -51,7 +53,7 @@ function parse() {
 function flush() {
   fs.appendFileSync(output_file, buffer.join('\n') + "\n", 'utf-8');
   buffer = [];
-  console.info(`Done writing ${completed} records`);
+  console.info(`Completed ${completed} records`);
   return;
 }
 
