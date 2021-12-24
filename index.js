@@ -36,8 +36,7 @@ function parse() {
   const xml = fs.createReadStream(xml_file_path);
   var xmlStream = new XmlStream(xml);
   xmlStream.on(`endElement ${xml_tag_to_extract}`, function (element) {
-    element = element['$'];
-    buffer.push(JSON.stringify(element));
+    buffer.push(JSON.stringify(parseOneXml(element)));
     if (buffer.length >=  flags.get('limit')) {
       flush();
     }
@@ -54,6 +53,25 @@ function flush() {
   buffer = [];
   console.info(`Done writing ${completed} records`);
   return;
+}
+
+function parseOneXml(element) {
+  const newelement = {};
+
+  //If root xml tag has attributes, add it to json root 
+  if (element['$']) {
+    for (attr in element['$']) {
+      newelement[attr] = element['$'][attr]
+    }
+  }
+
+  //delete attribute keys
+  delete element['$'];
+
+  //add rest of tags as child
+  newelement['child'] = element;
+  
+  return newelement;
 }
 
 main();

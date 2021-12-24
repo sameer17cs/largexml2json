@@ -102,4 +102,5 @@ dist
 
 # TernJS port file
 .tern-port
-test.xml
+test/sample.json
+test/test.xml
